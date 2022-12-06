@@ -16,16 +16,16 @@ set(ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
 message("= Root Directory: ${ROOT_DIR}")
 
 if(NOT COMMAND pico_sdk_init)
-    if(DEFINED $ENV{PICO_SDK_PATH})
-        set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
+    if(NOT "$ENV{PICO_SDK_PATH}" STREQUAL "")
+        set(PICO_SDK $ENV{PICO_SDK_PATH})
     else()
-        set(PICO_SDK_PATH ${ROOT_DIR}/3rdparty/pico-sdk/pico_sdk_init.cmake)
+        set(PICO_SDK ${ROOT_DIR}/3rdparty/pico-sdk)
     endif()
 
-    message("= Pico SDK Path: ${PICO_SDK_PATH}")
+    message("= Pico SDK Path: ${PICO_SDK}")
     message("=")
 
-    include(${PICO_SDK_PATH})
+    include(${PICO_SDK}/pico_sdk_init.cmake)
 endif()
 
 project(${PROJECT_NAME} C CXX ASM)
